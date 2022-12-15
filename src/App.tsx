@@ -1,10 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import BoardComponent from './components/BoardComponent';
+import { Board } from './models/Board';
 
 function App() {
+  const [board, setBoard] = useState(new Board())
+
+  useEffect(() => {
+    restart()
+  }, [])
+
+  const restart = () => {
+    const newBoard = new Board
+    newBoard.initCells()
+    setBoard(newBoard)
+  }
+
   return (
-    <div>
-      Hello world
+    <div className='app'>
+      <BoardComponent
+        board={board}
+        setBoard={setBoard}
+      />
     </div>
   );
 }
