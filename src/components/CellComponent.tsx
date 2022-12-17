@@ -9,7 +9,7 @@ const CellComponent: FC<CellProps> = ({cell}) => {
     return(
         //Объединяем два класса в одну строку
         <div className={['cell', cell.color].join(' ')}>
-            {cell.figure}
+            {cell.figure?.logo && <img src={cell.figure.logo} alt=""/>}
         </div>
     )
 }
