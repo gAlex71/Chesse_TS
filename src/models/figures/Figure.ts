@@ -31,7 +31,7 @@ export class Figure{
 
     //Может ли фигура двигаться в ячейку, или нет
     canMove(target: Cell) :boolean{
-        return true;
+        
     }
     
     //Перемещение фигуры

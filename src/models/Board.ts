@@ -31,6 +31,26 @@ export class Board {
         return this.cells[y][x]
     }
 
+    public getCopyBoard(): Board{
+        const newBoard = new Board()
+        //Переносим ячейки в новый объект доски
+        newBoard.cells = this.cells
+        return newBoard
+    }
+
+    public availableCells(selectedCell: Cell | null){
+        //Проходимся по всем ячейкам
+        for(let i = 0; i < this.cells.length; i++){
+            const row = this.cells[i]
+            for(let j = 0; j < row.length; i++){
+                //Потенциальная ячейка
+                const target = row[j]
+                //Равна ли эта ячейка той, на которую мы можем походить
+                //С помощью '!!' - преобразовываем в boolean
+                target.available = !!selectedCell?.figure?.canMove(target)
+            }
+        }
+    }
 
     //Добавление типов фигур на доску
     //Это приватные методы, так как будут использоваться только внутри класса

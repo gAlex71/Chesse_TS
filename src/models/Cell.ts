@@ -22,4 +22,15 @@ export class Cell {
         this.available = false
         this.id = Math.random()
     }
+
+    //Ячейка, на которую мы хотим переместить фигуру
+    moveFigure(target: Cell){
+        //Если на этой ячейке есть фигура и canMove = true, тогда будем перемещать фигуру
+        if(this.figure && this.figure?.canMove(target)){
+            this.figure.moveFigure(target)
+            //Удаляем фигуру с текущей ячейки, и перемещаем на target ячейку
+            target.figure = this.figure
+            this.figure = null
+        }
+    }
 }
