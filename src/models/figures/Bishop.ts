@@ -10,4 +10,12 @@ export class Bishop extends Figure {
         this.logo = color === Colors.BLACK ? blackLogo : whiteLogo;
         this.name = FigureNames.BISHOP;
     }
+
+    canMove(target: Cell): boolean {
+        //Если родительский класс возвращает false
+        if(!super.canMove(target)){
+            return false
+        }
+        return true
+    }
 }

@@ -31,7 +31,16 @@ export class Figure{
 
     //Может ли фигура двигаться в ячейку, или нет
     canMove(target: Cell) :boolean{
-        
+        //Проверка цвета
+        if(target.figure?.color === this.color){
+            return false
+        }
+        //Проверка на короля, его мы съесть не можем
+        if(target.figure?.name === FigureNames.KING){
+            return false
+        }
+        //Остальную логику мы будем определять в дочерних классах
+        return true
     }
     
     //Перемещение фигуры
