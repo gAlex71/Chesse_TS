@@ -42,7 +42,7 @@ export class Board {
         //Проходимся по всем ячейкам
         for(let i = 0; i < this.cells.length; i++){
             const row = this.cells[i]
-            for(let j = 0; j < row.length; i++){
+            for(let j = 0; j < row.length; j++){
                 //Потенциальная ячейка
                 const target = row[j]
                 //Равна ли эта ячейка той, на которую мы можем походить

@@ -12,11 +12,12 @@ interface BoardProps{
 const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
-    const clickCell = (cell: Cell) => {
+    function click(cell: Cell) {
         //Если ячейка, на которой стоит фигура не равняется ячейке, на которую мы хотим нажать, и при этом canMove = true для этой ячейки
         if(selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)){
             selectedCell.moveFigure(cell)
             setSelectedCell(null)
+            updateBoard()
         }else{
         //Если ячейка содержит фигуру, то изменяем состояние
             setSelectedCell(cell)
@@ -28,13 +29,13 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
     }, [selectedCell])
 
     //Подсвечивание ячеек, в которые возможен вход
-    const availableCells = () => {
+    function availableCells(){
         board.availableCells(selectedCell)
         updateBoard()
     }
 
     //Чтобы компонент перерисоваля при подсвечивании ячеек, создаем копию доски, и ее отображаем
-    const updateBoard = () => {
+    function updateBoard(){
         const newBoard = board.getCopyBoard()
         setBoard(newBoard)
     }
@@ -45,7 +46,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
                 <React.Fragment key={index}>
                     {row.map(cell => 
                         <CellComponent
-                            click={clickCell}
+                            click={click}
                             key={cell.id}
                             cell={cell}
                             //Если выбранная координата совпадает с координатой ячейки
