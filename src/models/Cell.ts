@@ -23,9 +23,17 @@ export class Cell {
         this.id = Math.random()
     }
 
-    isEmpty(){
+    isEmpty(): boolean{
         //Если ячейка свободна
         return this.figure === null
+    }
+
+    isEnemy(target: Cell): boolean{
+        //Проверяем цвет стоящей фигуры
+        if(target.figure){
+            return this.figure?.color !== target.figure.color
+        }
+        return false
     }
 
     //Пустая ли вертикаль
