@@ -100,11 +100,21 @@ export class Cell {
         this.figure.cell = this
     }
 
+    addLostFigure(figure: Figure){
+        figure.color === Colors.WHITE
+            ?   this.board.lostWhiteFigures.push(figure)
+            :   this.board.lostBlackFigures.push(figure)
+    }
+
     //Ячейка, на которую мы хотим переместить фигуру
     moveFigure(target: Cell){
         //Если на этой ячейке есть фигура и canMove = true, тогда будем перемещать фигуру
         if(this.figure && this.figure?.canMove(target)){
             this.figure.moveFigure(target)
+            //Если в ячейке стояла вражеская фигура, то добавляем ее в массив съеденных
+            if(target.figure){
+                this.addLostFigure(target.figure)
+            }
             //Удаляем фигуру с текущей ячейки, и перемещаем на target ячейку
             target.setFigure(this.figure)
             this.figure = null
